@@ -5,11 +5,7 @@ contract MyFirstERC20Token {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Minted(address indexed minter, uint256 value);
 
-    event Approval(
-        address indexed owner,
-        address indexed spender,
-        uint256 value
-    );
+    event Approval(address indexed owner, address indexed spender, uint256 value);
 
     string public name = "My Learning Progress Token";
     string public symbol = "MLPT";
@@ -27,6 +23,10 @@ contract MyFirstERC20Token {
 
     function balanceOf(address owner) public view returns (uint256) {
         return balances[owner];
+    }
+
+    function hasMinted(address account) public view returns (bool) {
+        return minters[account];
     }
 
     function mint() public {
@@ -50,17 +50,10 @@ contract MyFirstERC20Token {
         return true;
     }
 
-    function transferFrom(
-        address from,
-        address to,
-        uint256 value
-    ) public returns (bool) {
+    function transferFrom(address from, address to, uint256 value) public returns (bool) {
         require(to != address(0), "ERC20: transfer to zero address");
         require(balances[from] >= value, "ERC20: insufficient balance");
-        require(
-            allowances[from][msg.sender] >= value,
-            "ERC20: insufficient allowance"
-        );
+        require(allowances[from][msg.sender] >= value, "ERC20: insufficient allowance");
 
         balances[from] -= value;
         balances[to] += value;
@@ -79,10 +72,7 @@ contract MyFirstERC20Token {
         return true;
     }
 
-    function allowance(
-        address owner,
-        address spender
-    ) public view returns (uint256) {
+    function allowance(address owner, address spender) public view returns (uint256) {
         return allowances[owner][spender];
     }
 }
