@@ -2,7 +2,7 @@
 
 > ⚠️ **WIP - Development in Progress**
 >
-> This project is currently under development. Testing, security audits, and mainnet deployment are pending.
+> This project is currently under development. Testing and mainnet deployment are pending.
 >
 > 📝 **Note:** This README was generated with assistance from Claude AI. The smart contract code was written by the project author.
 
@@ -22,9 +22,7 @@ My Learning Progress Token (MLPT) is an educational ERC20 token implementation b
 - [x] Basic ERC20 implementation
 - [x] Deploy script created
 - [x] Local testing on Anvil
-- [ ] Unit tests (in progress)
-- [ ] Integration tests
-- [ ] Security audit
+- [x] Unit tests (in progress)
 - [ ] Testnet deployment
 - [ ] Mainnet deployment
 
