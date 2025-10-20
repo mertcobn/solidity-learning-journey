@@ -14,12 +14,15 @@ contract MyFirstERC20TokenTest is Test {
     address secondUser = makeAddr("secondUser");
     address emptyAddress = address(0);
 
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Minted(address indexed minter, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+
     function setUp() external {
         MyFirstERC20TokenScript myFirstERC20TokenScript = new MyFirstERC20TokenScript();
         myFirstERC20Token = myFirstERC20TokenScript.run();
     }
-
-    function testEvents() public {}
 
     function testNameIsCorrect() public view {
         string memory tokenName = myFirstERC20Token.name();
@@ -145,11 +148,34 @@ contract MyFirstERC20TokenTest is Test {
         vm.expectRevert("ERC20: approve to zero address");
         myFirstERC20Token.approve(emptyAddress, mintAmount);
     }
-    
+
     function testApproveUpdatesAllowance() public {
         vm.prank(firstUser);
         myFirstERC20Token.approve(secondUser, mintAmount);
         assertEq(myFirstERC20Token.allowance(firstUser, secondUser), mintAmount);
+    }
+
+    function testTransferEmitsEvent() public {
+        vm.startPrank(firstUser);
+        myFirstERC20Token.mint();
+        vm.expectEmit(true, true, false, true);
+        emit Transfer(firstUser, secondUser, mintAmount);
+        myFirstERC20Token.transfer(secondUser, mintAmount);
+        vm.stopPrank();
+    }
+
+    function testMintEmitsEvent() public {
+        vm.prank(firstUser);
+        vm.expectEmit(true, false, false, true);
+        emit Minted(firstUser, mintAmount);
+        myFirstERC20Token.mint();
+    }
+
+    function testApproveEmitsEvent() public {
+        vm.prank(firstUser);
+        vm.expectEmit(true, true, false, true);
+        emit Approval(firstUser, secondUser, mintAmount);
+        myFirstERC20Token.approve(secondUser, mintAmount);
     }
 
 }
