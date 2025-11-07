@@ -2,5 +2,24 @@
 src = "src"
 out = "out"
 libs = ["lib"]
+remappings = ["@openzeppelin/=lib/openzeppelin-contracts/"]
+solc = "0.8.30"
+
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+multiline_func_header = "all"
+quote_style = "double"
+number_underscore = "thousands"
+wrap_comments = true
+
+[profile.zksync]
+src = "src"
+libs = ["lib"]
+fallback_oz = true
+mode = "3"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

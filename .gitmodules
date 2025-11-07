@@ -1,0 +1,3 @@
+[submodule "MyFirstERC721Token (MLPT-NFT)/lib/openzeppelin-contracts"]
+	path = MyFirstERC721Token (MLPT-NFT)/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

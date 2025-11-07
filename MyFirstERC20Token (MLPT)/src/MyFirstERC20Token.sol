@@ -4,14 +4,17 @@ pragma solidity ^0.8.30;
 contract MyFirstERC20Token {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Minted(address indexed minter, uint256 value);
-
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     string public name = "My Learning Progress Token";
     string public symbol = "MLPT";
     uint8 public decimals = 18;
     uint256 public totalSupply;
-    uint256 private constant MINT_AMOUNT = 10 * 10 ** 18;
+    uint256 private constant MINT_AMOUNT = 10e18;
 
     mapping(address => uint256) private balances;
     mapping(address => bool) private minters;
@@ -50,10 +53,17 @@ contract MyFirstERC20Token {
         return true;
     }
 
-    function transferFrom(address from, address to, uint256 value) public returns (bool) {
+    function transferFrom(
+        address from,
+        address to,
+        uint256 value
+    ) public returns (bool) {
         require(to != address(0), "ERC20: transfer to zero address");
         require(balances[from] >= value, "ERC20: insufficient balance");
-        require(allowances[from][msg.sender] >= value, "ERC20: insufficient allowance");
+        require(
+            allowances[from][msg.sender] >= value,
+            "ERC20: insufficient allowance"
+        );
 
         balances[from] -= value;
         balances[to] += value;
@@ -72,7 +82,10 @@ contract MyFirstERC20Token {
         return true;
     }
 
-    function allowance(address owner, address spender) public view returns (uint256) {
+    function allowance(
+        address owner,
+        address spender
+    ) public view returns (uint256) {
         return allowances[owner][spender];
     }
 }

@@ -8,16 +8,19 @@ import {MyFirstERC20TokenScript} from "../script/MyFirstERC20TokenScript.s.sol";
 contract MyFirstERC20TokenTest is Test {
     MyFirstERC20Token myFirstERC20Token;
 
-    uint256 mintAmount = 10 * 10 ** 18;
+    uint256 mintAmount = 10e18;
 
     address firstUser = makeAddr("firstUser");
     address secondUser = makeAddr("secondUser");
     address emptyAddress = address(0);
 
-
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Minted(address indexed minter, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     function setUp() external {
         MyFirstERC20TokenScript myFirstERC20TokenScript = new MyFirstERC20TokenScript();
@@ -27,13 +30,19 @@ contract MyFirstERC20TokenTest is Test {
     function testNameIsCorrect() public view {
         string memory tokenName = myFirstERC20Token.name();
         console.log("Token name:", tokenName);
-        assertEq(keccak256(abi.encodePacked(tokenName)), keccak256(abi.encodePacked("My Learning Progress Token")));
+        assertEq(
+            keccak256(abi.encodePacked(tokenName)),
+            keccak256(abi.encodePacked("My Learning Progress Token"))
+        );
     }
 
     function testSymbolIsCorrect() public view {
         string memory symbolName = myFirstERC20Token.symbol();
         console.log("Symbol name:", symbolName);
-        assertEq(keccak256(abi.encodePacked(symbolName)), keccak256(abi.encodePacked("MLPT")));
+        assertEq(
+            keccak256(abi.encodePacked(symbolName)),
+            keccak256(abi.encodePacked("MLPT"))
+        );
     }
 
     function testDecimalsIsEighteen() public view {
@@ -51,7 +60,10 @@ contract MyFirstERC20TokenTest is Test {
     function testMintIncreasesUserBalance() public {
         vm.prank(firstUser);
         myFirstERC20Token.mint();
-        console.log("balanceOf(firstUser): ", myFirstERC20Token.balanceOf(firstUser));
+        console.log(
+            "balanceOf(firstUser): ",
+            myFirstERC20Token.balanceOf(firstUser)
+        );
         assertEq(myFirstERC20Token.balanceOf(firstUser), mintAmount);
     }
 
@@ -140,7 +152,13 @@ contract MyFirstERC20TokenTest is Test {
 
         assertEq(myFirstERC20Token.balanceOf(firstUser), mintAmount / 2);
         assertEq(myFirstERC20Token.balanceOf(secondUser), mintAmount / 2);
-        assertTrue(myFirstERC20Token.transferFrom(firstUser, secondUser, mintAmount / 2));
+        assertTrue(
+            myFirstERC20Token.transferFrom(
+                firstUser,
+                secondUser,
+                mintAmount / 2
+            )
+        );
         vm.stopPrank();
     }
 
@@ -152,7 +170,10 @@ contract MyFirstERC20TokenTest is Test {
     function testApproveUpdatesAllowance() public {
         vm.prank(firstUser);
         myFirstERC20Token.approve(secondUser, mintAmount);
-        assertEq(myFirstERC20Token.allowance(firstUser, secondUser), mintAmount);
+        assertEq(
+            myFirstERC20Token.allowance(firstUser, secondUser),
+            mintAmount
+        );
     }
 
     function testTransferEmitsEvent() public {
@@ -177,5 +198,4 @@ contract MyFirstERC20TokenTest is Test {
         emit Approval(firstUser, secondUser, mintAmount);
         myFirstERC20Token.approve(secondUser, mintAmount);
     }
-
 }

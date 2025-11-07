@@ -1,1 +1,17 @@
+# macOS
 .DS_Store
+
+# Foundry
+broadcast/
+zkout/
+cache/
+out/
+
+# Environment variables
+.env
+.env.local
+*.env
+
+# Private keys
+*.key
+*.pem
