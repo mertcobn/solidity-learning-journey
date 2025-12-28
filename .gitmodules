@@ -1,3 +1,7 @@
 [submodule "MyFirstERC721Token (MLPT-NFT)/lib/openzeppelin-contracts"]
 	path = MyFirstERC721Token (MLPT-NFT)/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+
+[submodule "MyFirstERC721Token (MLPT-NFT)/lib/forge-std"]
+	path = MyFirstERC721Token (MLPT-NFT)/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std

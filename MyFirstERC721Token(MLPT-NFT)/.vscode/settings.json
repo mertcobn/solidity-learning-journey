@@ -1,0 +1,10 @@
+{
+  "solidity.packageDefaultDependenciesContractsDirectory": "src",
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "solidity.remappings": [
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+    "forge-std/=lib/forge-std/src/",
+    "@erc20/=../MyFirstERC20Token(MLPT)/src/"
+  ],
+  "solidity.compileUsingRemoteVersion": "v0.8.30"
+}
