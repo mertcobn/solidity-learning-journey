@@ -1,2 +1,0 @@
-@mlpt-nft/=../MyFirstERC721Token (MLPT-NFT)/src/
-@openzeppelin/=lib/openzeppelin-contracts/
